@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install @ffmpeg/ffmpeg 2>&1 | tail -5)",
+      "Bash(npm install jszip 2>&1 | tail -5)",
+      "Bash(node --input-type=module <<'EOF'\nimport { createServer } from 'vite'\nconst server = await createServer\\({ server: { port: 5174 } }\\)\nawait server.close\\(\\)\nconsole.log\\('Config OK'\\)\nEOF)"
+    ]
+  }
+}
