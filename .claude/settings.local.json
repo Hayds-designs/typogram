@@ -3,7 +3,11 @@
     "allow": [
       "Bash(npm install @ffmpeg/ffmpeg 2>&1 | tail -5)",
       "Bash(npm install jszip 2>&1 | tail -5)",
-      "Bash(node --input-type=module <<'EOF'\nimport { createServer } from 'vite'\nconst server = await createServer\\({ server: { port: 5174 } }\\)\nawait server.close\\(\\)\nconsole.log\\('Config OK'\\)\nEOF)"
+      "Bash(node --input-type=module <<'EOF'\nimport { createServer } from 'vite'\nconst server = await createServer\\({ server: { port: 5174 } }\\)\nawait server.close\\(\\)\nconsole.log\\('Config OK'\\)\nEOF)",
+      "WebFetch(domain:unpkg.com)",
+      "Bash(ls /Users/haydon.macleod/typogram/node_modules/@ffmpeg/ffmpeg/dist/ && cat /Users/haydon.macleod/typogram/node_modules/@ffmpeg/ffmpeg/package.json | python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\('main:', d.get\\('main'\\)\\); print\\('module:', d.get\\('module'\\)\\); print\\('exports:', json.dumps\\(d.get\\('exports', {}\\), indent=2\\)\\)\")",
+      "Bash(git push)",
+      "Bash(git add . && git commit -m \"Added Ascii\" && git push)"
     ]
   }
 }

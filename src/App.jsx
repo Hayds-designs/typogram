@@ -803,6 +803,7 @@ export default function Typogram() {
   const [customFontFamily, setCustomFontFamily] = useState("");
   const [imageURL,   setImageURL]   = useState(null);
   const [imageName,  setImageName]  = useState("");
+  const [textMode,   setTextMode]   = useState("custom");
   const imageBitmapRef = useRef(null);
   const canvasRef    = useRef(null);
   const lumMapRef    = useRef(null);
@@ -1136,8 +1137,39 @@ export default function Typogram() {
         {/* TEXT */}
         <HoverZone first>
           <div style={{ marginBottom: 18 }}>
-            <span style={lbl}>Text</span>
-            <input value={word} onChange={e => setWord(e.target.value)} placeholder="Enter text..." style={iStyle} />
+            <div style={{ display: "flex", gap: 4, marginBottom: 8 }}>
+              {["custom", "ascii"].map(tab => (
+                <button key={tab} onClick={() => {
+                  setTextMode(tab);
+                  if (tab === "ascii") {
+                    const chars = "!@#$%^&*()_+-=[]{}|;:,.<>?/~`ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+                    setWord(Array.from({ length: 48 }, () => chars[Math.floor(Math.random() * chars.length)]).join(""));
+                  }
+                }} style={{
+                  flex: 1, padding: "6px 0", fontSize: 9, letterSpacing: "0.14em",
+                  textTransform: "uppercase", fontFamily: "'Space Mono', monospace", fontWeight: 700,
+                  cursor: "pointer", border: "1px solid #252525", borderRadius: 4,
+                  background: textMode === tab ? "#2a2a2a" : "transparent",
+                  color: textMode === tab ? "#ccc" : "#555",
+                }}>{tab === "custom" ? "Custom Type" : "ASCII"}</button>
+              ))}
+            </div>
+            {textMode === "custom" ? (
+              <input value={word} onChange={e => setWord(e.target.value)} placeholder="Enter text..." style={iStyle} />
+            ) : (
+              <div style={{ display: "flex", gap: 6 }}>
+                <input value={word} readOnly style={{ ...iStyle, flex: 1, color: "#777", cursor: "default" }} />
+                <button onClick={() => {
+                  const chars = "!@#$%^&*()_+-=[]{}|;:,.<>?/~`ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+                  setWord(Array.from({ length: 48 }, () => chars[Math.floor(Math.random() * chars.length)]).join(""));
+                }} style={{
+                  padding: "0 10px", fontSize: 14, cursor: "pointer",
+                  border: "1px solid #252525", borderRadius: 4,
+                  background: "transparent", color: "#666",
+                  flexShrink: 0,
+                }} title="Regenerate">↻</button>
+              </div>
+            )}
           </div>
         </HoverZone>
 
