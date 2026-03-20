@@ -923,7 +923,7 @@ export default function Typogram() {
     const { FFmpeg } = await import("@ffmpeg/ffmpeg");
     const ffmpeg = new FFmpeg();
     // Load single-threaded core from CDN (no SharedArrayBuffer needed)
-    const base = "https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd";
+    const base = "https://unpkg.com/@ffmpeg/core@0.12.9/dist/esm";
     const toBlobURL = async (url, type) => {
       const buf = await fetch(url).then(r => r.arrayBuffer());
       return URL.createObjectURL(new Blob([buf], { type }));
